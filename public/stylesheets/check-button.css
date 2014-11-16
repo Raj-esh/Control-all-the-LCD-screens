@@ -1,0 +1,73 @@
+#ck-button {
+    margin:3px;
+    color:#fff;
+	background-color:#428bca;
+	border-color:#357ebd;
+    border-radius:50px;
+   	background-image:none;
+	border:1px solid transparent;
+    overflow:auto;
+    float:left;
+	font-size:20px;
+	line-height:0.75;
+	text-align:center;
+	white-space:nowrap;
+	-align:middle;
+	cursor:pointer;
+	text-align:center;
+	-webkit-user-select:none;
+	-moz-user-select:none;
+	-ms-user-select:none;
+	user-select:none;
+}
+
+#ck-button:hover,#ck-button:active {
+    color:#fff;
+	background-color:#ec971f;
+	border-color:#d58512;
+}
+
+#ck-button label {
+    float:left;
+    width:1.75em;
+}
+
+#ck-button label span {
+    text-align:center;
+    padding:10px 0px;
+    display:block;
+}
+
+#ck-button label input {
+    position:absolute;
+    top:-2000px;
+}
+
+#ck-button input:checked + span {
+      color:#fff;
+	  background-color:#ec971f;
+	  border-color:#d58512;
+}
+
+
+ .highlight{
+	display:inline-block;
+	padding:9px 14px;
+	margin-bottom:10px;
+	margin-top:10px;
+	background-color:#f5f5f5;
+	border:1px solid #6685E0;
+	border-radius:4px;
+	width:95%;
+} 
+
+ .highlight1{
+	display:inline-block;
+	padding:0px 0px;
+	margin-bottom:10px;
+	margin-top:10px;
+	background-color:#f5f5f5;
+	border:1px solid #6685E0;
+	border-radius:4px;
+	width:100%;
+} 

@@ -1,0 +1,373 @@
+doctype html
+HTML
+	head
+		meta(charset="utf-8")
+		meta(http-equiv="X-UA-Compatible",content="IE=edge")
+		title LCD Master
+		link(href="/stylesheets/bootstrap.min.css", rel="stylesheet")
+		link(href="/stylesheets/dashboard.css", rel="stylesheet")
+		link(rel='stylesheet', href='/stylesheets/jquery-ui-1.8.14.custom.css')
+		link(href='/stylesheets/cover1.css' rel='stylesheet')
+		link(href='/stylesheets/check-button.css', rel='stylesheet')
+
+		script(type='text/javascript', src='/javascripts/jquery.js')
+		script(type='text/javascript', src='/javascripts/jquery-ui-1.8.14.custom.min.js')
+		
+		link(href="/stylesheets/image-picker.css", rel="stylesheet")
+		script(type='text/javascript', src='/javascripts/image-picker.min.js')
+		
+		|<!--[if lt IE 9]>
+		|	<script src="/javascripts/html5shiv.min.js"></script>
+		|	<script src="/javascripts/respond.min.js"></script>
+		|<![endif]-->
+		
+		script(type='text/javascript').
+			$(function() {
+			
+				$( "#datepickerfrom" ).datepicker({ dateFormat: "yy-mm-dd" ,minDate: 0, maxDate: "+1M +10D" });
+				$( "#datepickerto" ).datepicker({ dateFormat: "yy-mm-dd" ,minDate: 0, maxDate: "+1M +10D" });
+				
+				$("#selectImage").imagepicker({
+					hide_select: true
+				});
+				$("#pick_image").hide();
+					
+				$('#byme1').change(function(){
+					$("#pick_image").show();
+				});
+				
+				$('#onclickupload').click(function(){
+					window.open('/LCD/upload', '_blank', 'location=no,toolbar=no, scrollbars=no, resizable=no, top=200, left=500, height=250,width=400,scrollbars=yes,status=no');
+					
+				});
+				
+					$("#All").hide();
+			
+					$('#displayphase1').click(function(){
+						$("#All").show();
+						$('#phase1').show();
+						$('#phase2').hide();
+						});
+					$('#displayphase2').click(function(){
+						$("#All").show();
+						$('#phase1').hide();
+						$('#phase2').show();
+					});
+					
+					$('#displayboth').click(function(){
+						$("#All").show();
+						$('#phase1').show();
+						$('#phase2').show();
+					});
+					
+					
+					$("#update").hide();
+			
+					$('#dcmessage').click(function(){
+						$("#update").show();
+						$('#dcmessage1').show();
+						$('#ticker1').hide();
+						});
+					$('#ticker').click(function(){
+						$("#update").show();
+						$('#dcmessage1').hide();
+						$('#ticker1').show();
+					});
+					
+					$('#selectboth').click(function(){
+						$("#update").show();
+						$('#dcmessage1').show();
+						$('#ticker1').show();
+					});
+					
+
+					$('input').click(function() {
+						if($(this).prop("checked") == true){
+							var value = $(this).val();
+								if(value == 100)
+								{
+									$('#phase1 input').prop('checked', true);
+								}
+								else if(value == 200)
+								{
+									$('#phase2 input').prop('checked', true);
+								}
+						}
+						else if($(this).prop("checked") == false){
+							var value = $(this).val();
+								if(value == 100)
+								{
+									$('#phase1 input').prop('checked', false);
+								}
+								else if(value == 200)
+								{
+									$('#phase2 input').prop('checked', false);
+								}
+						}
+					});
+					
+				
+				var $container = $('.image_picker_selector');
+				// initialize
+					$container.imagesLoaded(function () {
+					$container.masonry({
+						columnWidth: 30,
+						itemSelector: '.thumbnail'
+					});
+				});
+			
+
+			});
+
+		style.
+			.image_picker_image {
+				max-width: 100px;
+				max-height: 80px;
+				background-color: #FF0000;
+			}
+			.form-control {
+				position: relative;
+				height: auto;
+				-webkit-box-sizing: border-box;
+				-moz-box-sizing: border-box;
+				box-sizing: border-box;
+				padding: 8px;
+				font-size: 18px;
+			}
+			
+			
+	body
+		.navbar.navbar-inverse.navbar-fixed-top(role="navigation",style='font-size: 15px;')
+			.container-fluid
+				.navbar-header
+					a.navbar-brand(href="/LCD/Preview" target="_blank") Preview
+					if roleid == 1 || roleid == 2
+						a.navbar-brand(href="/LCD/ManageUser") Manage Users
+					a.navbar-brand(href="/LCD/ManageContent") Manage Content
+				.navbar-collapse.collapse
+					ul.nav.navbar-nav.navbar-right
+						li
+							a Welcome #{username}
+						li
+							a(href="/LCD/Welcome") Home
+						li
+							a(href="/LCD/Logout") Logout
+						
+		
+		.container-fluid
+			.row
+				form(method='POST', action='/Quiz/setquiz', enctype='multipart/formdata')
+					.col-sm-4.col-md-3.sidebar
+						ul.nav.nav-sidebar
+							div(align='center')
+								Label(style = "font-size:20px;margin-right:10px;") Phase
+								button(type="button", id = "displayphase1", class="btn btn-success infy", style="padding:10px 16px;") 1
+								button(type="button", id = "displayphase2", class="btn btn-success infy", style="padding:10px 16px;") 2
+								button(type="button", id = "displayboth", class="btn btn-success infy", style="padding:10px 16px;") Both
+							
+							#All(style="font-family:tahoma",align='center')
+								#phase1.highlight
+									#ck-button
+										label
+											input(type='checkbox')
+											span 1
+									#ck-button
+										label
+											input(type='checkbox', value='1')
+											span 2
+									#ck-button
+										label
+											input(type='checkbox', value='1')
+											span 3
+									#ck-button
+										label
+											input(type='checkbox', value='1')
+											span 4
+									#ck-button
+										label
+											input(type='checkbox', value='1')
+											span 5
+									#ck-button
+										label
+											input(type='checkbox', value='1')
+											span 6
+									#ck-button
+										label
+											input(type='checkbox')
+											span 7
+									#ck-button
+										label
+											input(type='checkbox', value='1')
+											span 8
+									#ck-button
+										label
+											input(type='checkbox', value='1')
+											span 9
+									#ck-button
+										label
+											input(type='checkbox', value='1')
+											span 10
+									#ck-button
+										label
+											input(type='checkbox', value='1')
+											span 11
+									#ck-button
+										label
+											input(type='checkbox', value='1')
+											span 12
+									#ck-button
+										label
+											input(type='checkbox', value='1')
+											span 13
+									#ck-button
+										label
+											input(type='checkbox', value='1')
+											span 14
+									#ck-button
+										label
+											input(type='checkbox', value='1')
+											span 15
+									
+									#ck-button(style="float:right;")
+										label(style='width: 2.1em;')
+											input(type='checkbox', value='100')
+											span All
+								
+								#phase2.highlight
+									#ck-button
+										label
+											input(type='checkbox', value='1')
+											span 1
+									#ck-button
+										label
+											input(type='checkbox', value='1')
+											span 2
+									#ck-button(style='border-radius: 80px;')
+										label(style='width: 2.1em;')
+											input(type='checkbox', value='1')
+											span 3
+									#ck-button
+										label
+											input(type='checkbox', value='1')
+											span 4
+									#ck-button(style='border-radius: 80px;')
+										label(style='width: 2.1em;')
+											input(type='checkbox', value='1')
+											span 5
+									#ck-button
+										label
+											input(type='checkbox', value='1')
+											span 6
+									#ck-button
+										label
+											input(type='checkbox')
+											span 7
+									#ck-button
+										label
+											input(type='checkbox', value='1')
+											span 8
+									#ck-button
+										label
+											input(type='checkbox', value='1')
+											span 9
+									#ck-button
+										label
+											input(type='checkbox', value='1')
+											span 10
+									#ck-button
+										label
+											input(type='checkbox', value='1')
+											span 11
+									#ck-button
+										label(style='width: 2.1em;')
+											input(type='checkbox', value='1')
+											span FC1
+									#ck-button
+										label(style='width: 2.1em;')
+											input(type='checkbox', value='1')
+											span FC2
+									#ck-button
+										label(style='width: 2.1em;')
+											input(type='checkbox', value='1')
+											span FC3
+									#ck-button(style="float:right;")
+										label(style='width: 2.1em;')
+											input(type='checkbox', value=200)
+											span All
+
+					.col-sm-8.col-sm-offset-4.col-md-9.col-md-offset-3.main
+						if roleid == 1 || roleid == 2
+							div(style="margin-top:5px;")
+								Label(style = "font-size:20px;margin-right:10px;") Update
+								button(type="button", id = "dcmessage", class="btn btn-success infy1") DC Message
+								button(type="button", id = "ticker", class="btn btn-success infy1") Ticker
+								button(type="button", id = "selectboth", class="btn btn-success infy1") Both
+						
+						if roleid == 0
+							div(style="margin-top:5px;")
+								Label(style = "font-size:20px;margin-right:10px;") Update
+								button(type="button", id = "dcmessage", class="btn btn-success infy1") SDB Specific
+								button(type="button", id = "ticker", class="btn btn-success infy1") Ticker
+								button(type="button", id = "selectboth", class="btn btn-success infy1") Both
+						hr
+						if roleid == 1 || roleid == 2
+							div#update
+								div#dcmessage1
+									h3 DC Message
+									select#byme1(style='font-size: 25px;margin: 20px auto;', class='btn btn-lg')
+										option(value='select', selected='selected') Select
+										option(value='Image') Image
+										option(value='Video') Video
+										option(value='Text') Text
+									div#pick_image
+										select(id = 'selectImage' , class='image-picker', multiple='multiple')
+											option( data-img-src="/images/cat1.jpg", value="1") Cat 1 
+											option( data-img-src="/images/cat2.jpg", value="2") Cat 2 
+											option( data-img-src="/images/cat5.jpg", value="5") Cat 3 
+											option( data-img-src="/images/cat3.jpg", value="3") Cat 4 
+											option( data-img-src="/images/cat5.jpg", value="4") Cat 5 
+											option( data-img-src="/images/cat6.jpg", value="6") Cat 6
+										button(type='button', class="btn btn-lg btn-success infy1", id='onclickupload', style='float:right;') Upload Image
+									table(class = 'table', margin='auto', border='0',style='font-size: 20px;max-width:70%;background-color:transparent;')
+										tr
+											td(style='float:right;') Valid From
+											td
+												input(type='text',id='datepickerfrom',required='required', name='from', autocomplete='off')
+										tr
+											td(style='float:right;') Valid To
+											td
+												input(type='text',id='datepickerto',required='required', name='to', autocomplete='off')
+									hr
+								div#ticker1
+									h3 Ticker
+									input(type="text", class="form-control" placeholder="Enter Ticker")
+								br
+								button(class="btn btn-lg btn-success infy1", type="submit", align="center") Publish
+									
+						if roleid == 0
+							div#update
+								div#dcmessage1
+									h3 Building Specific Message
+									select#byme1(style='font-size: 25px;margin: 20px auto;', class='btn btn-lg')
+										option(value='select', selected='selected') Select
+										option(value='Image') Image
+										option(value='Video') Video
+										option(value='Text') Text
+									div#pick_image
+										select(id = 'selectImage' , class='image-picker', multiple='multiple')
+											option( data-img-src="/images/cat1.jpg", value="1") Cat 1 
+											option( data-img-src="/images/cat2.jpg", value="2") Cat 2 
+											option( data-img-src="/images/cat5.jpg", value="5") Cat 3 
+											option( data-img-src="/images/cat3.jpg", value="3") Cat 4 
+											option( data-img-src="/images/cat5.jpg", value="4") Cat 5 
+											option( data-img-src="/images/cat6.jpg", value="6") Cat 6
+									hr
+								div#ticker1
+									h3 Ticker
+									input(type="text", class="form-control" placeholder="Enter Ticker")
+								br
+								button(class="btn btn-lg btn-success infy1", type="submit", align="center") Publish
+
+
+		
+		

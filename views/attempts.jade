@@ -1,0 +1,49 @@
+doctype html
+html(lang="en")
+	head
+		meta(charset="utf-8")
+		meta(http-equiv="X-UA-Compatible",content="IE=edge")
+		title Previous Tests
+		link(href="/stylesheets/bootstrap.min.css", rel="stylesheet")
+		link(href="/stylesheets/image-picker.css", rel="stylesheet")
+
+		script(type='text/javascript', src='/javascripts/jquery-1.5.1.min.js')
+		script(type='text/javascript', src='/javascripts/image-picker.min.js')
+
+		|<!--[if lt IE 9]>
+		|	<script src="/javascripts/html5shiv.min.js"></script>
+		|	<script src="/javascripts/respond.min.js"></script>
+		|<![endif]-->
+		
+		script(type='text/javascript').
+			$(document).ready(function () {
+				$("#selectImage").imagepicker({
+					hide_select: true
+				});
+
+				var $container = $('.image_picker_selector');
+				// initialize
+				$container.imagesLoaded(function () {
+					$container.masonry({
+						columnWidth: 30,
+						itemSelector: '.thumbnail'
+					});
+				});
+			});
+		
+		style.
+			.image_picker_image {
+				max-width: 140px;
+				max-height: 100px;
+				background-color: #FF0000;
+			}
+
+	body
+		select(id = 'selectImage' , class='image-picker')
+			option( data-img-src="/images/cat1.jpg", value="1") Cat 1 
+			option( data-img-src="/images/cat2.jpg", value="2") Cat 2 
+			option( data-img-src="/images/cat5.jpg", value="5") Cat 3 
+			option( data-img-src="/images/cat3.jpg", value="3") Cat 4 
+			option( data-img-src="/images/hey1.png", value="4") Cat 5 
+			option( data-img-src="/images/hey.jpg", value="6") Cat 6 
+			
